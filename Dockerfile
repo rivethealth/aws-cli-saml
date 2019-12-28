@@ -1,7 +1,9 @@
-FROM python:3.8-alpine
+FROM alpine:3.11
 
-CMD pip install boto3
+RUN apk add python3 \
+    && pip3 install boto3 \
+    && ln -s /usr/bin/python3 /usr/local/bin/python
 
-COPY aws-saml.py /usr/bin/local/aws-saml
+COPY aws-saml.py /usr/local/bin/aws-saml
 
-ENTRYPOINT [ "/usr/bin/local/aws-saml" ]
+ENTRYPOINT [ "/usr/local/bin/aws-saml" ]
