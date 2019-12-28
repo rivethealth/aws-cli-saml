@@ -4,17 +4,25 @@ Authenticate AWS CLI with SAML.
 
 ## Install
 
+### Basic
+
 ```sh
 pip install boto3
 ```
 
 Download [`aws-saml.py`](aws-saml.py).
 
+### Docker
+
+```sh
+docker pull rivethealth/aws-saml
+```
+
 ## Usage
 
 1. Obtain a SAML authentication response (e.g. using Chrome extension https://github.com/rivethealth/chrome-saml).
 
-2. Run `aws-saml.py`, providing the base64-encoding SAML response.
+2. Run `aws-saml`, providing the base64-encoding SAML response.
 
 Credentials are now saved to `~/.aws/credentials`, which will be used by the AWS CLI.
 
