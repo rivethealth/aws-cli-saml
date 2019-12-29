@@ -23,5 +23,5 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     project_urls={"Issues": "https://github.com/rivethealth/aws-saml-cli/issues",},
     url="https://github.com/rivethealth/aws-saml-cli",
-    version="0.0.1",
+    version="1.0.0",
 )
