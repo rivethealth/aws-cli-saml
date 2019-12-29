@@ -9,6 +9,7 @@ try:
 except NameError:
     pass
 
+
 def run(profile=None, session_duration=None, idp_arn=None, role_arn=None):
     profile_name = profile or os.environ.get("AWS_PROFILE", "default")
     section_name = (
