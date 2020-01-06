@@ -1,6 +1,6 @@
 # AWS SAML CLI
 
-![PyPi](https://img.shields.io/pypi/v/awscli-saml)
+[![PyPi](https://img.shields.io/pypi/v/awscli-saml)](https://pypi.org/project/awscli-saml/)
 
 Authenticate AWS CLI with SAML.
 
