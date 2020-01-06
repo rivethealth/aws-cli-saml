@@ -25,7 +25,7 @@ def main():
     parser.add_argument(
         "-s",
         "--saml",
-        help="Base64 encoded SAML assertion. Defaults to SAML_ASSERTION.",
+        help="Base64 encoded SAML assertion. Defaults to SAML_ASSERTION, or stdin.",
     )
     args = parser.parse_args()
 
