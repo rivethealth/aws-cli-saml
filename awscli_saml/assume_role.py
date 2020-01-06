@@ -1,4 +1,6 @@
 import boto3
+import botocore
+import botocore.config
 import configparser
 import os
 import os.path
@@ -29,9 +31,15 @@ def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=N
     role_arn = role_arn or config.get(section_name, "saml.role_arn")
 
     # would use getpass, but truncates to terminal max 4096
-    saml_assertion = saml or os.environ.get("SAML_ASSERTION") or input("Base64 encoded SAML response:\n")
+    saml_assertion = (
+        saml
+        or os.environ.get("SAML_ASSERTION")
+        or input("Base64 encoded SAML response:\n")
+    )
 
-    sts = boto3.client("sts")
+    sts = boto3.client(
+        "sts", config=botocore.config.Config(signature_version=botocore.UNSIGNED)
+    )
     response = sts.assume_role_with_saml(
         DurationSeconds=session_duration,
         PrincipalArn=principal_arn,

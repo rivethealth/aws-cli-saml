@@ -36,5 +36,5 @@ def main():
         session_duration=args.session_duration,
         idp_arn=args.idp_arn,
         role_arn=args.role_arn,
-        saml=args.saml
+        saml=args.saml,
     )
