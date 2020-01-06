@@ -22,6 +22,11 @@ def main():
     parser.add_argument(
         "-r", "--role-arn", help="Assumed IAM role ARN. Defaults to saml.role_arn."
     )
+    parser.add_argument(
+        "-s",
+        "--saml",
+        help="Base64 encoded SAML assertion. Defaults to SAML_ASSERTION.",
+    )
     args = parser.parse_args()
 
     import awscli_saml.assume_role as assume_role
@@ -31,4 +36,5 @@ def main():
         session_duration=args.session_duration,
         idp_arn=args.idp_arn,
         role_arn=args.role_arn,
+        saml=args.saml
     )
