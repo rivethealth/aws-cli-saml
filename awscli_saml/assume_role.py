@@ -10,7 +10,7 @@ except NameError:
     pass
 
 
-def run(profile=None, session_duration=None, idp_arn=None, role_arn=None):
+def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=None):
     profile_name = profile or os.environ.get("AWS_PROFILE", "default")
     section_name = (
         profile_name if profile_name == "default" else "profile {}".format(profile_name)
@@ -29,7 +29,7 @@ def run(profile=None, session_duration=None, idp_arn=None, role_arn=None):
     role_arn = role_arn or config.get(section_name, "saml.role_arn")
 
     # would use getpass, but truncates to terminal max 4096
-    saml_assertion = input("Base64 encoded SAML response:\n")
+    saml_assertion = saml or os.environ.get("SAML_ASSERTION") or input("Base64 encoded SAML response:\n")
 
     sts = boto3.client("sts")
     response = sts.assume_role_with_saml(
