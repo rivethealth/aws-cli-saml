@@ -67,6 +67,12 @@ def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=N
         # Clear out any existing value if legacy support not enabled
         cred.remove_option(profile_name, "aws_security_token")
 
+    cred.set(
+        profile_name, 
+        "aws_session_expiration", 
+        response["Credentials"]["Expiration"].strftime('%Y-%m-%dT%H:%M:%S%z')
+    )
+
     with open(cred_path, "w+") as f:
         cred.write(f)
 
