@@ -12,7 +12,7 @@ except NameError:
     pass
 
 
-def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=None):
+def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=None, legacy_support=False):
     profile_name = profile or os.environ.get("AWS_PROFILE", "default")
     section_name = (
         profile_name if profile_name == "default" else "profile {}".format(profile_name)
@@ -60,6 +60,12 @@ def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=N
         response["Credentials"]["SecretAccessKey"],
     )
     cred.set(profile_name, "aws_session_token", response["Credentials"]["SessionToken"])
+    if legacy_support:
+        # Duplicate aws_session_token to aws_security_token to support legacy AWS clients.
+        cred.set(profile_name, "aws_security_token", response["Credentials"]["SessionToken"])
+    else:
+        # Clear out any existing value if legacy support not enabled
+        cred.remove_option(profile_name, "aws_security_token")
 
     with open(cred_path, "w+") as f:
         cred.write(f)
