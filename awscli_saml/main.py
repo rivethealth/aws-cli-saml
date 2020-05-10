@@ -33,6 +33,11 @@ def main():
         action="store_true",
         help="Adds backward compatible aws_security_token value to support legacy clients.",
     )
+
+    import awscli_saml.__version__ as about
+    parser.add_argument('--version', action='version', \
+        version='%(prog)s v.{version}'.format(version=about.__version__))
+
     args = parser.parse_args()
 
     import awscli_saml.assume_role as assume_role
