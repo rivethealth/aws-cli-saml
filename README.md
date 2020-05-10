@@ -44,7 +44,7 @@ Options may be provided on the command line, or be saved in the profile configur
 
 ```
 usage: aws-saml [-h] [-p PROFILE] [-d SESSION_DURATION] [-i IDP_ARN]
-                [-r ROLE_ARN] [-s SAML]
+                [-r ROLE_ARN] [-s SAML] [-v]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -61,4 +61,5 @@ optional arguments:
                         Assumed IAM role ARN. Defaults to saml.role_arn.
   -s SAML, --saml SAML  Base64 encoded SAML assertion. Defaults to
                         SAML_ASSERTION, or stdin.
+  -v, --version         show program's version number and exit
 ```
