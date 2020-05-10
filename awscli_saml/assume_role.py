@@ -4,7 +4,7 @@ import botocore.config
 import configparser
 import os
 import os.path
-import readline  # needed for terminal raw mode (> 4096 characters)
+import traceback
 
 try:
     input = raw_input
@@ -31,11 +31,13 @@ def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=N
     role_arn = role_arn or config.get(section_name, "saml.role_arn")
 
     # would use getpass, but truncates to terminal max 4096
-    saml_assertion = (
-        saml
-        or os.environ.get("SAML_ASSERTION")
-        or input("Base64 encoded SAML response:\n")
-    )
+    saml_assertion = saml or os.environ.get("SAML_ASSERTION")
+    if not saml_assertion:
+        try:
+            import readline  # needed for terminal raw mode (> 4096 characters)
+        except:
+            print("Failed to load readline\n{}".format(traceback.format_exc()))
+        saml_assertion = input("Base64 encoded SAML response:\n")
 
     sts = boto3.client(
         "sts", config=botocore.config.Config(signature_version=botocore.UNSIGNED)

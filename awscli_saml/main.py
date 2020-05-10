@@ -1,6 +1,7 @@
 import argparse
 from .version import __version__
 
+
 def main():
     parser = argparse.ArgumentParser("aws-saml")
     parser.add_argument(
@@ -23,12 +24,12 @@ def main():
         "-r", "--role-arn", help="Assumed IAM role ARN. Defaults to saml.role_arn."
     )
     parser.add_argument(
-        "-s",
-        "--saml",
-        help="Base64 encoded SAML assertion. Defaults to SAML_ASSERTION, or stdin.",
+        "-v", "--version", action="version", version="%(prog)s {}".format(__version__)
     )
     parser.add_argument(
-        "-v", "--version", action="version", version="%(prog)s {}".format(__version__)
+        "saml",
+        help="Base64 encoded SAML assertion. Defaults to SAML_ASSERTION, or stdin.",
+        nargs="?",
     )
 
     args = parser.parse_args()
