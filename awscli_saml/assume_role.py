@@ -12,7 +12,7 @@ except NameError:
     pass
 
 
-def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=None, legacy_support=False):
+def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=None):
     profile_name = profile or os.environ.get("AWS_PROFILE", "default")
     section_name = (
         profile_name if profile_name == "default" else "profile {}".format(profile_name)
@@ -66,9 +66,9 @@ def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=N
     )
 
     cred.set(
-        profile_name, 
-        "aws_session_expiration", 
-        response["Credentials"]["Expiration"].strftime('%Y-%m-%dT%H:%M:%S%z')
+        profile_name,
+        "aws_session_expiration",
+        response["Credentials"]["Expiration"].strftime("%Y-%m-%dT%H:%M:%S%z"),
     )
 
     with open(cred_path, "w+") as f:
