@@ -2,15 +2,9 @@
 import setuptools
 import os
 
-version_file = os.path.join(
-        os.path.abspath(os.path.dirname(__file__)), 
-        'awscli_saml', 
-        '__version__.py'
-    )
-
-about = {}
-with open(version_file, 'r') as f:
-    exec(f.read(), about)
+version = {}
+with open("awscli_saml/version.py", "r") as f:
+    exec(f.read(), version)
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -34,5 +28,5 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     project_urls={"Issues": "https://github.com/rivethealth/aws-saml-cli/issues",},
     url="https://github.com/rivethealth/aws-saml-cli",
-    version=about['__version__'],
+    version=version["__version__"],
 )

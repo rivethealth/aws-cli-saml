@@ -1,5 +1,5 @@
 import argparse
-
+from .version import __version__
 
 def main():
     parser = argparse.ArgumentParser("aws-saml")
@@ -34,10 +34,6 @@ def main():
         help="Adds backward compatible aws_security_token value to support legacy clients.",
     )
 
-    import awscli_saml.__version__ as about
-    parser.add_argument('--version', action='version', \
-        version='%(prog)s v.{version}'.format(version=about.__version__))
-
     args = parser.parse_args()
 
     import awscli_saml.assume_role as assume_role
@@ -48,5 +44,4 @@ def main():
         idp_arn=args.idp_arn,
         role_arn=args.role_arn,
         saml=args.saml,
-        legacy_support=args.legacy,
     )
