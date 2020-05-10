@@ -6,7 +6,7 @@ Authenticate AWS CLI with SAML.
 
 ## Install
 
-### Pip
+### [Pip](https://pypi.org/project/awscli-saml/)
 
 ```sh
 pip install awscli-saml
@@ -18,7 +18,7 @@ Run as
 aws-saml
 ```
 
-### Docker
+### [Docker](https://hub.docker.com/r/rivethealth/aws-saml)
 
 ```sh
 docker pull rivethealth/aws-saml
