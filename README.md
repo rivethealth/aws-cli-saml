@@ -34,7 +34,7 @@ docker run -it -v ~/.aws:/root/.aws rivethealth/aws-saml
 
 1. Obtain a SAML authentication response (e.g. using Chrome extension https://github.com/rivethealth/chrome-saml).
 
-2. Run `aws-saml` command, providing the base64-encoding SAML response.
+2. Run `aws-saml` command, providing the base64-encoded SAML response.
 
 Credentials are now saved to `~/.aws/credentials`, which will be used by the AWS CLI.
 
@@ -44,7 +44,12 @@ Options may be provided on the command line, or be saved in the profile configur
 
 ```
 usage: aws-saml [-h] [-p PROFILE] [-d SESSION_DURATION] [-i IDP_ARN]
-                [-r ROLE_ARN] [-s SAML] [-v]
+                [-r ROLE_ARN] [-v]
+                [saml]
+
+positional arguments:
+  saml                  Base64 encoded SAML assertion. Defaults to
+                        SAML_ASSERTION, or stdin.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -59,7 +64,5 @@ optional arguments:
                         saml.idp_arn.
   -r ROLE_ARN, --role-arn ROLE_ARN
                         Assumed IAM role ARN. Defaults to saml.role_arn.
-  -s SAML, --saml SAML  Base64 encoded SAML assertion. Defaults to
-                        SAML_ASSERTION, or stdin.
   -v, --version         show program's version number and exit
 ```
