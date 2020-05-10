@@ -27,6 +27,12 @@ def main():
         "--saml",
         help="Base64 encoded SAML assertion. Defaults to SAML_ASSERTION, or stdin.",
     )
+    parser.add_argument(
+        "-l",
+        "--legacy",
+        action="store_true",
+        help="Adds backward compatible aws_security_token value to support legacy clients.",
+    )
     args = parser.parse_args()
 
     import awscli_saml.assume_role as assume_role
@@ -37,4 +43,5 @@ def main():
         idp_arn=args.idp_arn,
         role_arn=args.role_arn,
         saml=args.saml,
+        legacy_support=args.legacy,
     )
