@@ -60,12 +60,10 @@ def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=N
         response["Credentials"]["SecretAccessKey"],
     )
     cred.set(profile_name, "aws_session_token", response["Credentials"]["SessionToken"])
-    if legacy_support:
-        # Duplicate aws_session_token to aws_security_token to support legacy AWS clients.
-        cred.set(profile_name, "aws_security_token", response["Credentials"]["SessionToken"])
-    else:
-        # Clear out any existing value if legacy support not enabled
-        cred.remove_option(profile_name, "aws_security_token")
+    # Duplicate aws_session_token to aws_security_token to support legacy AWS clients.
+    cred.set(
+        profile_name, "aws_security_token", response["Credentials"]["SessionToken"]
+    )
 
     cred.set(
         profile_name, 

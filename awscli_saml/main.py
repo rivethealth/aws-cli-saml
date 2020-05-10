@@ -28,10 +28,7 @@ def main():
         help="Base64 encoded SAML assertion. Defaults to SAML_ASSERTION, or stdin.",
     )
     parser.add_argument(
-        "-l",
-        "--legacy",
-        action="store_true",
-        help="Adds backward compatible aws_security_token value to support legacy clients.",
+        "-v", "--version", action="version", version="%(prog)s {}".format(__version__)
     )
 
     args = parser.parse_args()
