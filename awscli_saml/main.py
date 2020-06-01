@@ -10,6 +10,11 @@ def main():
         help="AWS profile name. Defaults to AWS_PROFILE or 'default'.",
     )
     parser.add_argument(
+        "-e",
+        "--region",
+        help="AWS region. Defaults to AWS_DEFAULT_REGION",
+    )
+    parser.add_argument(
         "-d",
         "--session-duration",
         type=int,
@@ -38,6 +43,7 @@ def main():
 
     assume_role.run(
         profile=args.profile,
+        region=args.region,
         session_duration=args.session_duration,
         idp_arn=args.idp_arn,
         role_arn=args.role_arn,

@@ -43,7 +43,7 @@ Credentials are now saved to `~/.aws/credentials`, which will be used by the AWS
 Options may be provided on the command line, or be saved in the profile configuration in `~/.aws/config`.
 
 ```
-usage: aws-saml [-h] [-p PROFILE] [-d SESSION_DURATION] [-i IDP_ARN]
+usage: aws-saml [-h] [-p PROFILE] [-e REGION] [-d SESSION_DURATION] [-i IDP_ARN]
                 [-r ROLE_ARN] [-v]
                 [saml]
 
@@ -56,6 +56,8 @@ optional arguments:
   -p PROFILE, --profile PROFILE
                         AWS profile name. Defaults to AWS_PROFILE or
                         'default'.
+  -e REGION, --region   REGION
+                        AWS region. Defaults to AWS_DEFAULT_REGION.
   -d SESSION_DURATION, --session-duration SESSION_DURATION
                         Session duration in seconds. Defaults to
                         saml.session_duration or 3600.

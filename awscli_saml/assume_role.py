@@ -12,8 +12,9 @@ except NameError:
     pass
 
 
-def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=None):
+def run(profile=None, region=None, session_duration=None, idp_arn=None, role_arn=None, saml=None):
     profile_name = profile or os.environ.get("AWS_PROFILE", "default")
+    region_name = region or os.environ.get("AWS_DEFAULT_REGION", None)
     section_name = (
         profile_name if profile_name == "default" else "profile {}".format(profile_name)
     )
@@ -56,6 +57,10 @@ def run(profile=None, session_duration=None, idp_arn=None, role_arn=None, saml=N
         cred.add_section(profile_name)
 
     cred.set(profile_name, "aws_access_key_id", response["Credentials"]["AccessKeyId"])
+    if region_name is not None:
+        cred.set(profile_name, "region", region_name)
+    else:
+        cred.remove_option(profile_name, "region")
     cred.set(
         profile_name,
         "aws_secret_access_key",
