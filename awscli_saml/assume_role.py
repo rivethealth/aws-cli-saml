@@ -25,9 +25,13 @@ def run(profile=None, region=None, session_duration=None, idp_arn=None, role_arn
     config = configparser.RawConfigParser()
     config.read(config_path)
 
-    session_duration = session_duration or config.getint(
-        section_name, "saml.session_duration"
-    )
+
+    try:
+        session_duration = session_duration or config.getint(
+            section_name, "saml.session_duration")
+    except configparser.NoOptionError:
+        session_duration = 3600
+
     principal_arn = idp_arn or config.get(section_name, "saml.idp_arn")
     role_arn = role_arn or config.get(section_name, "saml.role_arn")
 
