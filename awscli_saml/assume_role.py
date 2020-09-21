@@ -34,6 +34,10 @@ def run(profile=None, region=None, session_duration=None, idp_arn=None, role_arn
 
     principal_arn = idp_arn or config.get(section_name, "saml.idp_arn")
     role_arn = role_arn or config.get(section_name, "saml.role_arn")
+    try:
+        region_name = region_name or config.get(section_name, "region")
+    except configparser.NoOptionError:
+        pass
 
     # would use getpass, but truncates to terminal max 4096
     saml_assertion = saml or os.environ.get("SAML_ASSERTION")
