@@ -19,8 +19,8 @@ def run(profile=None, region=None, session_duration=None, idp_arn=None, role_arn
         profile_name if profile_name == "default" else "profile {}".format(profile_name)
     )
 
-    config_path = os.path.expanduser("~/.aws/config")
-    cred_path = os.path.expanduser("~/.aws/credentials")
+    config_path = os.environ.get("AWS_CONFIG_FILE") or os.path.expanduser("~/.aws/config")
+    cred_path = os.environ.get("AWS_SHARED_CREDENTIALS_FILE") or os.path.expanduser("~/.aws/credentials")
 
     config = configparser.RawConfigParser()
     config.read(config_path)
